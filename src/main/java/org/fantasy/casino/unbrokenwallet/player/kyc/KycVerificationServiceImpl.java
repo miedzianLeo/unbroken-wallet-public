@@ -14,8 +14,8 @@ class KycVerificationServiceImpl implements KycVerificationService {
 
     @Override
     public Player handleVerificationResult(KycVerificationEvent event) throws Exception {
-        var player = playerRepository.findByUuid(event.playerUid())
-                .orElseThrow(() -> new Exception("Player not found with id " + event.playerUid()));
+        var player = playerRepository.findByUuid(event.playerUuid())
+                .orElseThrow(() -> new Exception("Player not found with id " + event.playerUuid()));
 
         player.setKycVerified(event.verificationResult());
 
