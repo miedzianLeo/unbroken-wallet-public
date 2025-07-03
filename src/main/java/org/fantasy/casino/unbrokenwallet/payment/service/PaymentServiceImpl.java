@@ -49,7 +49,7 @@ class PaymentServiceImpl implements PaymentService {
 
     @Override
     public Payment updatePaymentState(String paymentUid, PaymentState state) {
-        var payment = getPaymentByUid(paymentUid);
+        var payment = getPaymentByUuid(paymentUid);
         var account = payment.getAccount();
         var paymentType = payment.getPaymentType();
         var amount = payment.getAmount();
@@ -74,10 +74,8 @@ class PaymentServiceImpl implements PaymentService {
         }
     }
 
-    public Payment getPaymentByUid(String paymentUid){
-        return paymentRepository.findByUuid(paymentUid)
-                .orElseThrow(() -> new EntityNotFoundException(String.format("Payment not found with uid: %s", paymentUid)));
+    public Payment getPaymentByUuid(String paymentUuid){
+        return paymentRepository.findByUuid(paymentUuid)
+                .orElseThrow(() -> new EntityNotFoundException(String.format("Payment not found with uuid: %s", paymentUuid)));
     }
-
-
 }
